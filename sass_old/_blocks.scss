@@ -1,0 +1,32 @@
+aside.l-region--sidebar-first .block,
+aside.l-region--sidebar-second .block {
+  padding: 10px;
+  background: url("/sites/all/themes/custom/boriana1/images/yellow_background_small.jpg") repeat-y center top transparent;  
+  border-bottom: 8px solid $medium-yellow;
+  margin-bottom: 2em;
+  
+  .block__title {
+    background-color:rgba(84,28,21,0.6);
+    color: white;
+    text-align: center;
+    border-bottom: 3px solid $orange-yellow;
+  }
+}
+
+
+
+/* Transparent about block absolutely positioned in header */
+/*
+#block-block-3 {
+  position: absolute;
+  top: 50px;
+  right: 0px;
+//  background-color:rgba(255,216,99,0.6);
+  background-color:rgba(84,28,21,0.6);
+//  color: black;
+  color: white;
+  width: 50%;
+  height: 200px;
+  overflow: scroll;
+}
+*/
