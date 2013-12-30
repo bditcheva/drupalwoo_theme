@@ -1,102 +1,107 @@
-/*******************************************************************************
-<<<<<<< HEAD
- * _base.scss
- *
- * Base styles define the default look for HTML and common Drupal elements.
- *
- * These rules will generally be made up of element selectors for HTML elements
- * such as headings, paragraphs and lists. Common Drupal elements such as form
- * items, collapsible fieldsets and messages should be included in this partial.
- *
- * The styleguide module (http://drupal.org/project/styleguide) gives you a good
- * overview of Drupal's common elements for styling. By setting a solid baseline
-=======
- * _base.scss 
-
- * Base styles define the default look for HTML and common Drupal elements. 
- *
- * These rules will generally be made up of element selectors for HTML elements
- * such as headings, paragraphs and lists. Common Drupal elements such as form 
- * items, collapsible fieldsets and messages should be included in this partial.
- *
- * The styleguide module (http://drupal.org/project/styleguide) gives you a good
- * overview of Drupals common elements for styling. By setting a solid baseline
->>>>>>> sandbox/7.x-4.x
- * before adding any more specific customisations you ensure that as any new
- * features are added they will be correctly styled without any extra work.
- ******************************************************************************/
+//
+// "base" partial
+//
+// To make it easier to use all variables and mixins in any Sass file in this
+// theme, each .scss file has a @import "base" declaration. And this _base.scss
+// file is in charge of importing all the other partials needed for the theme.
+//
+// This base partial is organized in this way:
+// - First we set any shared Sass variables.
+// - Next we import Compass plug-ins (Sass mixin libraries).
+// - Last we import a _custom.scss partial that includes our custom mixins.
+//
 
 
-$font-color: #4a4b48; 
-$background-color: #ffffff;
-$brown-burgundy: #541c15;
+//
+// Legacy IE support
+//
+// These variables are used by many mixins to add additional CSS to support
+// specific versions of IE or specific vendor prefixes.
+//
+// To turn on support for IE6 or IE7, set those variables to true.
+//
+// Zen does not require special handling for IE8 or later. But Compass uses that
+// variable for a couple edge cases. We include it for completeness sake. See
+// the documentation at http://compass-style.org/reference/compass/support/
+$legacy-support-for-ie6: false;
+$legacy-support-for-ie7: false;
+$legacy-support-for-ie8: true;
 
-$light-grey: #ece9da;
-$meta-color: #7c7a6e;
-$link-color: $brown-burgundy; //#b08c1e; 
-$link-color-bright: #ef930f;
 
-$bright-yellow: #fff37b;
-$orange-yellow: #ffd863;
-$medium-yellow: #fee18f;
+//
+// Font faces, stacks and sizes.
+//
 
-$blue: #35a0d2;
-$dark-blue: #236685;
+// Compass' vertical_rhythm extension is a powerful tool to set up a vertical
+// rhythm for your entire page. You can see some of its mixins and functions in
+// use in the normalize.scss file.
+// @see http://compass-style.org/reference/compass/typography/vertical_rhythm/
+$light-blue-color: #aadef8;
+$blue-color: #489EC8;
+$orange-color: #F8992B;
+
+$font-color: #5d5e5b;
+$title-color: $orange-color;
 
 
-html {
-  color: $font-color;
-}
+$base-font-size:   14px; // The font size set on the root html element.
+$base-line-height: 24px; // This line-height determines the basic unit of vertical rhythm.
 
-body {
-  font-family: "Trebuchet MS", Helvetica, sans-serif;
-  font-size: 14px;
-/*  font-family: Enriqueta,georgia,serif;*/
-  line-height: 1.4;
-}
+$h1-font-size: 2    * $base-font-size;
+$h2-font-size: 1.5  * $base-font-size;
+$h3-font-size: 1.17 * $base-font-size;
+$h4-font-size: 1    * $base-font-size;
+$h5-font-size: 0.83 * $base-font-size;
+$h6-font-size: 0.75 * $base-font-size;
 
-/* Links */
-a {
-  color: $link-color;
-}
-a:link {
-}
-a:visited {
-}
-a:hover,
-a:focus {
-  color: $link-color-bright;
-}
-a:active {
-}
+// The following font family declarations are based on the Microsoft core web
+// fonts which are common fonts available on most computer systems. The DejaVu
+// and Nimbus Sans fonts are commonly available on Linux systems where the MS
+// fonts are less common. Tahoma and Helvetica are also widely available.
+//
+// A user's web browser will look at the comma-separated list and will
+// attempt to use each font in turn until it finds one that is available
+// on the user's computer. The final "generic" font (sans-serif, serif or
+// monospace) hints at what type of font to use if the web browser doesn't
+// find any of the fonts in the list.
 
-/* Page titles */
-h1 {
-  color: $blue;
-}
-h2, h3 {
-  color: $dark-blue;
-}
+// First, let's create some font stacks.
+$times-new-roman: "Times New Roman", Times, Georgia, "DejaVu Serif", serif;
+$times:           Times, "Times New Roman", Georgia, "DejaVu Serif", serif;
+$georgia:         Georgia, "Times New Roman", "DejaVu Serif", serif;
 
-/* Tables */
-table.table-dotted {
-  margin-top: 15px;
-  
-  caption {
-    padding-bottom: 8px;
-    font-size: larger;
-  }
-  
-  th {
-    font-weight: bold;
-    border-bottom: 3px solid $dark-blue;
-    background: none;
-  }
-  
-  tr {
-    border-bottom: 1px dotted $meta-color;
-  }
-  td {
-    padding: 5px 10px;
-  }
-}
+$verdana:         Verdana, Tahoma, "DejaVu Sans", sans-serif;
+$tahoma:          Tahoma, Verdana, "DejaVu Sans", sans-serif;
+$helvetica:       Helvetica, Arial, "Nimbus Sans L", sans-serif;
+$arial:           Arial, Helvetica, "Nimbus Sans L", sans-serif;
+
+// For an explanation of why "sans-serif" is at the end of this list, see
+// http://meyerweb.com/eric/thoughts/2010/02/12/fixed-monospace-sizing/
+$courier:         "Courier New", "DejaVu Sans Mono", monospace, sans-serif;
+
+// Now create some variables for the font stacks we want to use on this site.
+$base-font-family: $verdana; // The font family set on the html element.
+$font-body:        $verdana;
+$font-monospace:   $courier;
+
+
+//
+// Colors, etc.
+//
+
+// The amount lists, blockquotes and comments are indented.
+$indent-amount: 30px;
+
+
+//
+// Partials to be shared with all .scss files.
+//
+
+@import "compass/support";  // Add Compass' IE and vendor prefix support variables.
+@import "compass/utilities/general/clearfix"; // Better than Drupal's clearfix.
+@import "compass/utilities/sprites"; // See http://compass-style.org/help/tutorials/spriting/
+@import "compass/css3";     // Use one CSS3 mixin instead of multiple vendor prefixes.
+@import "compass/typography/vertical_rhythm"; // Helps set up a vertical rhythm.
+@import "zen";              // Add the Zen Grids responsive layout mixins.
+
+@import "custom";           // Import our custom mixins last.
